@@ -45,4 +45,5 @@ public class Recipe {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
-    private User user;}
+    private User user;
+}
