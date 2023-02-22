@@ -18,7 +18,7 @@ java -jar build/libs/*.jar
 ./gradlew bootRun
 ```
 
-By default, it runs on the port `8881`.
+By default, it runs on the port `8123`.
 
 ## Description
 A Spring Boot web service implementing a REST API using Spring Boot Security, with BCryptPasswordEncoder encryption for better security, and a persistence layer based on a H2 database.
