@@ -34,7 +34,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     @JsonManagedReference
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Recipe> recipes = new ArrayList<>();

@@ -1,6 +1,57 @@
 # Recipe Book Spring Boot
 A multi-user web service with Spring Boot that allows storing, retrieving, updating, and deleting recipes.
 
+## UPDATE - 22 FEBRUARY 2023 - Added GraphQL capabilities
+
+GraphQL is a query language. It provides a query in the form of a string that is sent to a server. The server interprets the query and then returns the result in the form of JSON format to the client.
+GraphQL is way faster than other communication APIs because it facilitates you to cut down your request query by choosing only the specific fields you want to query.
+
+GraphQL query is used to get exactly what you need, nothing more and nothing less.
+Example:
+```
+query {
+  users {
+    email
+    recipes {
+      name
+    }
+  }
+}
+```
+returns
+```
+{
+  "data": {
+    "users": [
+      {
+        "email": "catalin@gmail.com",
+        "recipes": [
+          {
+            "name": "banana bread"
+          },
+          {
+            "name": "pizza diavola"
+          },
+          {
+            "name": "pizza margherita"
+          }
+        ]
+      },
+      {
+        "email": "marcelo@gmail.com",
+        "recipes": [
+          {
+            "name": "mamaliga"
+          },
+          {
+            "name": "quesadilla"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 ## Running the application
 
 - Building app

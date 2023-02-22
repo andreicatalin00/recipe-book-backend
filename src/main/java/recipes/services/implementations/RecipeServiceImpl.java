@@ -103,6 +103,16 @@ public class RecipeServiceImpl implements RecipeService {
         return userRepository.save(user);
     }
 
+    @Override
+    public Iterable<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
     private static void sortByDateDescending(List<Recipe> recipeList) {
         recipeList.sort((Recipe o1, Recipe o2) -> o1.getDate().compareTo(o2.getDate()) * (-1));
     }

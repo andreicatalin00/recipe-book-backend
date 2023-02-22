@@ -1,0 +1,23 @@
+type Query{
+    users: [User]
+    userById(id: ID!): User
+    recipeById(id: ID!): Recipe
+}
+
+type User{
+    id: ID!
+    email: String!
+    password: String!
+    recipes: [Recipe]
+}
+
+type Recipe{
+    id: ID!
+    name: String!
+    category: String!
+    description: String!
+    ingredients: [String]
+    directions: [String]
+    date: String
+    user: User
+}

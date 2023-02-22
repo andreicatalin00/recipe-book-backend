@@ -42,8 +42,7 @@ public class Recipe {
     @UpdateTimestamp
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private User user;
 }

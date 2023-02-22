@@ -1,6 +1,8 @@
 package recipes.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -24,6 +27,21 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService, PasswordEncoder passwordEncoder) {
         this.recipeService = recipeService;
         this.passwordEncoder = passwordEncoder;
+    }
+
+
+    @QueryMapping
+    Iterable<User> users(){
+        return recipeService.findAllUsers();
+    }
+
+    @QueryMapping
+    Optional<User> userById(@Argument Long id){
+        return recipeService.findUserById(id);
+    }
+    @QueryMapping
+    Recipe recipeById(@Argument Long id){
+        return recipeService.findRecipeById(id);
     }
 
     @PostMapping("/register")
