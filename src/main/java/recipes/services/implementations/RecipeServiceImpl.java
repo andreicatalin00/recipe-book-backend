@@ -43,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         Recipe recipe = this.findRecipeById(id);
-        if(recipe == null){
+        if (recipe == null) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
         if (recipe.getUser().getEmail().equals(details.getUsername())) {
@@ -63,10 +63,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe findRecipeById(Long id) {
-        return recipeRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                "Recipe not found corresponding to the id  " + id));
+        return recipeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found corresponding to the id  " + id));
     }
 
     @Override
@@ -84,12 +81,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Collection<Recipe> findRecipesByCategory(String category) {
         List<Recipe> recipeList = new LinkedList<>();
-        recipeRepository.findAll().forEach((Recipe recipe) -> {
-            if (recipe.getCategory().equalsIgnoreCase(category)) {
-                recipeList.add(recipe);
-            }
-
-        });
+        recipeRepository.findAllByCategory(category).forEach(recipeList::add);
         sortByDateDescending(recipeList);
         return recipeList;
     }
@@ -97,11 +89,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Collection<Recipe> findRecipesByName(String name) {
         List<Recipe> recipeList = new LinkedList<>();
-        recipeRepository.findAll().forEach((Recipe recipe) -> {
-            if (recipe.getName().toUpperCase().contains(name.toUpperCase())) {
-                recipeList.add(recipe);
-            }
-        });
+        recipeRepository.findAllByNameIgnoreCase(name).forEach(recipeList::add);
         sortByDateDescending(recipeList);
         return recipeList;
     }
