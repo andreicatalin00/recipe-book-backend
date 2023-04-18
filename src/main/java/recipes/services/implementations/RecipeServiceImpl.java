@@ -13,6 +13,7 @@ import recipes.repositories.RecipeRepository;
 import recipes.repositories.UserRepository;
 import recipes.services.interfaces.RecipeService;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public void updateRecipeById(Long id, Recipe newRecipe) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
@@ -53,8 +55,6 @@ public class RecipeServiceImpl implements RecipeService {
             recipe.setDirections(newRecipe.getDirections());
             recipe.setIngredients(newRecipe.getIngredients());
             recipe.setDate(newRecipe.getDate());
-
-            recipeRepository.save(recipe);
         } else {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }

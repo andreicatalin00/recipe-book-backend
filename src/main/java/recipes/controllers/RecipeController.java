@@ -31,16 +31,17 @@ public class RecipeController {
 
 
     @QueryMapping
-    Iterable<User> users(){
+    Iterable<User> users() {
         return recipeService.findAllUsers();
     }
 
     @QueryMapping
-    Optional<User> userById(@Argument Long id){
+    Optional<User> userById(@Argument Long id) {
         return recipeService.findUserById(id);
     }
+
     @QueryMapping
-    Recipe recipeById(@Argument Long id){
+    Recipe recipeById(@Argument Long id) {
         return recipeService.findRecipeById(id);
     }
 
